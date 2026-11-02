@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'motion/react';
-import { STATS_DATA } from '../data/siteData';
+import { STATS_DATA } from '../../data/siteData';
 import { ShieldCheck, Award, CheckCircle2 } from 'lucide-react';
 
 function CounterNumber({ value, suffix, isVisible }: { value: number; suffix: string; isVisible: boolean }) {
@@ -27,7 +27,7 @@ function CounterNumber({ value, suffix, isVisible }: { value: number; suffix: st
   }, [isVisible, value]);
 
   return (
-    <span className="font-display font-extrabold text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight text-white leading-none break-words">
+    <span className="font-display font-extrabold text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight text-white leading-none wrap-break-word">
       {count}
       <span className="text-neutral-400 font-normal">{suffix}</span>
     </span>
@@ -56,7 +56,7 @@ export default function AboutSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Label */}
         <div className="flex items-center gap-3 mb-8 sm:mb-12">
-          <div className="w-8 h-[1px] bg-neutral-600" />
+          <div className="w-8 h-px bg-neutral-600" />
           <span className="font-tech text-xs tracking-[0.25em] text-neutral-400 uppercase font-semibold">
             03 / ABOUT THE ENTERPRISE
           </span>
@@ -70,7 +70,7 @@ export default function AboutSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl tracking-[-0.03em] leading-tight text-white uppercase break-words"
+              className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl tracking-[-0.03em] leading-tight text-white uppercase wrap-break-word"
             >
               BUILT <br />
               AROUND <br />
@@ -84,14 +84,14 @@ export default function AboutSection() {
               className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-neutral-800 flex flex-col gap-4"
             >
               <div className="flex items-start gap-3">
-                <ShieldCheck className="w-5 h-5 text-neutral-300 mt-1 flex-shrink-0" />
-                <p className="font-sans text-xs sm:text-sm text-neutral-400 leading-relaxed break-words">
+                <ShieldCheck className="w-5 h-5 text-neutral-300 mt-1 shrink-0" />
+                <p className="font-sans text-xs sm:text-sm text-neutral-400 leading-relaxed wrap-break-word">
                   Founded with a vision of redefining corporate security and facility management into a synchronized, technology-driven enterprise service discipline.
                 </p>
               </div>
               <div className="flex items-start gap-3">
-                <Award className="w-5 h-5 text-neutral-300 mt-1 flex-shrink-0" />
-                <p className="font-sans text-xs sm:text-sm text-neutral-400 leading-relaxed break-words">
+                <Award className="w-5 h-5 text-neutral-300 mt-1 shrink-0" />
+                <p className="font-sans text-xs sm:text-sm text-neutral-400 leading-relaxed wrap-break-word">
                   Strict adherence to statutory compliances, PF, ESI, Minimum Wages Act, and verified background integrity across all ground echelons.
                 </p>
               </div>
@@ -104,7 +104,7 @@ export default function AboutSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="font-sans text-sm sm:text-lg md:text-xl text-neutral-300 font-light leading-relaxed mb-8 sm:mb-12 break-words"
+              className="font-sans text-sm sm:text-lg md:text-xl text-neutral-300 font-light leading-relaxed mb-8 sm:mb-12 wrap-break-word"
             >
               <p>
                 At <strong className="font-semibold text-white">2. SQUAD SERVICES PRIVATE LIMITED</strong>,
@@ -143,7 +143,7 @@ export default function AboutSection() {
             {/* Corporate Note */}
             <div className="mt-8 sm:mt-10 p-4 border border-neutral-800/80 bg-neutral-900/40 rounded flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div className="flex items-center gap-2 text-xs text-neutral-400 font-tech tracking-wider">
-                <CheckCircle2 className="w-4 h-4 text-neutral-300 flex-shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-neutral-300 shrink-0" />
                 <span>VERIFIED ENTERPRISE METRICS &bull; AUDITED OPERATIONAL BENCHMARKS</span>
               </div>
               <span className="font-tech text-[10px] text-neutral-400 uppercase tracking-widest hidden sm:inline">

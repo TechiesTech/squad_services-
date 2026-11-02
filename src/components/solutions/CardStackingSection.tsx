@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, MotionValue } from 'motion/react';
-import { STACKED_CARDS } from '../data/siteData';
-import { StackedCardItem } from '../types';
+import { STACKED_CARDS } from '../../data/siteData';
+import { StackedCardItem } from '../../types';
 import { ShieldCheck, ArrowUpRight } from 'lucide-react';
 
 interface CardItemProps {
@@ -37,7 +37,7 @@ function StackingCardItem({
         }}
         className="w-full max-w-6xl bg-neutral-950 border border-neutral-800 rounded-none shadow-2xl overflow-hidden will-change-transform"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-0 sm:min-h-[460px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-0 sm:min-h-115">
           {/* Left Text / Specs Column */}
           <div className="lg:col-span-6 p-5 sm:p-8 lg:p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-neutral-800 bg-neutral-950">
             <div>
@@ -52,15 +52,15 @@ function StackingCardItem({
               </div>
 
               {/* Title & Subtitle */}
-              <h3 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl tracking-tight uppercase text-white mt-4 sm:mt-6 leading-tight break-words">
+              <h3 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl tracking-tight uppercase text-white mt-4 sm:mt-6 leading-tight wrap-break-word">
                 {card.title}
               </h3>
-              <p className="font-tech text-xs sm:text-sm text-neutral-400 uppercase tracking-wider mt-2 break-words">
+              <p className="font-tech text-xs sm:text-sm text-neutral-400 uppercase tracking-wider mt-2 wrap-break-word">
                 {card.subtitle}
               </p>
 
               {/* Description */}
-              <p className="font-sans text-xs sm:text-sm lg:text-base text-neutral-200 font-light leading-relaxed mt-4 sm:mt-6 break-words">
+              <p className="font-sans text-xs sm:text-sm lg:text-base text-neutral-200 font-light leading-relaxed mt-4 sm:mt-6 wrap-break-word">
                 {card.description}
               </p>
             </div>
@@ -81,7 +81,7 @@ function StackingCardItem({
           </div>
 
           {/* Right Image Column */}
-          <div className="lg:col-span-6 relative bg-neutral-900 overflow-hidden group min-h-[200px] sm:min-h-[260px] lg:min-h-full">
+          <div className="lg:col-span-6 relative bg-neutral-900 overflow-hidden group min-h-50 sm:min-h-65 lg:min-h-full">
             <img
               src={card.image}
               alt={card.title}
@@ -89,9 +89,9 @@ function StackingCardItem({
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
             <div className="absolute bottom-4 sm:bottom-6 right-4 sm:right-6 flex items-center gap-2 text-white font-tech text-[10px] sm:text-xs tracking-wider">
-              <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-neutral-400 flex-shrink-0" />
+              <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-neutral-400 shrink-0" />
               <span>2. SQUAD PROTOCOL</span>
             </div>
           </div>
@@ -117,25 +117,25 @@ export default function CardStackingSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16 text-center">
         {/* Section Label */}
         <div className="inline-flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-          <div className="w-6 sm:w-8 h-[1px] bg-neutral-600" />
+          <div className="w-6 sm:w-8 h-px bg-neutral-600" />
           <span className="font-tech text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.25em] text-neutral-400 uppercase font-semibold">
             08 / OPERATIONAL DEPTH
           </span>
-          <div className="w-6 sm:w-8 h-[1px] bg-neutral-600" />
+          <div className="w-6 sm:w-8 h-px bg-neutral-600" />
         </div>
 
         {/* Section Heading */}
-        <h2 className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[-0.03em] uppercase text-white break-words">
+        <h2 className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[-0.03em] uppercase text-white wrap-break-word">
           EVERY DETAIL MATTERS.
         </h2>
 
-        <p className="mt-3 sm:mt-4 font-sans text-sm sm:text-base md:text-lg text-neutral-400 font-light max-w-xl mx-auto leading-relaxed break-words px-2">
+        <p className="mt-3 sm:mt-4 font-sans text-sm sm:text-base md:text-lg text-neutral-400 font-light max-w-xl mx-auto leading-relaxed wrap-break-word px-2">
           Four foundational operational pillars engineered with relentless attention to human safety and physical facility performance.
         </p>
 
         {/* Scroll cue */}
         <div className="mt-4 inline-flex items-center gap-2 text-[10px] sm:text-xs font-tech text-neutral-400 tracking-wider sm:tracking-widest uppercase">
-          <ArrowUpRight className="w-3.5 h-3.5 rotate-45 text-white flex-shrink-0" />
+          <ArrowUpRight className="w-3.5 h-3.5 rotate-45 text-white shrink-0" />
           <span>SCROLL DOWN TO STACK PILLARS &bull; SCROLL UP TO RETURN</span>
         </div>
       </div>

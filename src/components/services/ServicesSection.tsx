@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { SERVICES_DATA } from '../data/servicesData';
-import { ServiceItem } from '../types';
+import { SERVICES_DATA } from '../../data/servicesData';
+import { ServiceItem } from '../../types';
 import { ArrowUpRight, CheckCircle, X, Shield, Layers } from 'lucide-react';
 
 interface ServicesSectionProps {
@@ -25,7 +25,7 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-16 gap-6 sm:gap-8">
           <div>
             <div className="flex items-center gap-3 mb-3 sm:mb-4">
-              <div className="w-8 h-[1px] bg-black" />
+              <div className="w-8 h-px bg-black" />
               <span className="font-tech text-xs tracking-[0.25em] text-neutral-500 uppercase font-semibold">
                 04 / CAPABILITY MATRIX
               </span>
@@ -94,10 +94,10 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
 
               {/* Middle: Title & Short Desc */}
               <div className="relative z-10 py-4 sm:py-6 my-auto min-w-0">
-                <h3 className="font-display font-bold text-base sm:text-lg lg:text-xl tracking-tight uppercase leading-snug text-black group-hover:text-neutral-900 transition-colors break-words">
+                <h3 className="font-display font-bold text-base sm:text-lg lg:text-xl tracking-tight uppercase leading-snug text-black group-hover:text-neutral-900 transition-colors wrap-break-word">
                   {service.title}
                 </h3>
-                <p className="mt-2 sm:mt-2.5 font-sans text-xs sm:text-sm text-neutral-600 leading-relaxed line-clamp-3 break-words">
+                <p className="mt-2 sm:mt-2.5 font-sans text-xs sm:text-sm text-neutral-600 leading-relaxed line-clamp-3 wrap-break-word">
                   {service.shortDesc}
                 </p>
               </div>
@@ -118,7 +118,7 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
         {/* Bottom Banner */}
         <div className="mt-10 sm:mt-14 p-5 sm:p-8 bg-neutral-950 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 sm:gap-6">
           <div className="flex items-center gap-3 sm:gap-4">
-            <div className="w-10 sm:w-12 h-10 sm:h-12 bg-neutral-900 border border-neutral-700 flex items-center justify-center flex-shrink-0">
+            <div className="w-10 sm:w-12 h-10 sm:h-12 bg-neutral-900 border border-neutral-700 flex items-center justify-center shrink-0">
               <Layers className="w-5 sm:w-6 h-5 sm:h-6 text-neutral-300" />
             </div>
             <div>
@@ -132,7 +132,7 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
           </div>
           <button
             onClick={() => onSelectService(SERVICES_DATA[0])}
-            className="w-full sm:w-auto px-6 py-3 bg-white text-black font-tech text-xs font-bold tracking-widest uppercase hover:bg-neutral-200 transition-colors flex-shrink-0 text-center"
+            className="w-full sm:w-auto px-6 py-3 bg-white text-black font-tech text-xs font-bold tracking-widest uppercase hover:bg-neutral-200 transition-colors shrink-0 text-center"
           >
             REQUEST FACILITY AUDIT
           </button>
@@ -151,14 +151,14 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
               className="relative w-full max-w-3xl bg-white text-black border border-neutral-200 shadow-2xl overflow-hidden max-h-[92dvh] flex flex-col"
             >
               {/* Modal Image Header */}
-              <div className="relative h-40 sm:h-56 bg-neutral-900 overflow-hidden flex-shrink-0">
+              <div className="relative h-40 sm:h-56 bg-neutral-900 overflow-hidden shrink-0">
                 <img
                   src={selectedServiceModal.image}
                   alt={selectedServiceModal.title}
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
                 <button
                   onClick={() => setSelectedServiceModal(null)}
                   className="absolute top-3 sm:top-4 right-3 sm:right-4 w-9 h-9 bg-black/60 hover:bg-black text-white flex items-center justify-center rounded-full transition-colors z-10"
@@ -173,7 +173,7 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
                       <span>&bull;</span>
                       <span>{selectedServiceModal.category}</span>
                     </div>
-                    <h3 className="font-display font-extrabold text-lg sm:text-2xl md:text-3xl tracking-tight uppercase break-words leading-tight">
+                    <h3 className="font-display font-extrabold text-lg sm:text-2xl md:text-3xl tracking-tight uppercase wrap-break-word leading-tight">
                       {selectedServiceModal.title}
                     </h3>
                   </div>
@@ -181,11 +181,11 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
               </div>
 
               {/* Modal Content Body */}
-              <div className="p-4 sm:p-8 overflow-y-auto flex-1">
+              <div className="p-4 sm:p-8 overflow-y-auto 1">
                 <h4 className="font-tech text-xs tracking-[0.2em] uppercase text-neutral-500 font-semibold mb-2">
                   OPERATIONAL SCOPE & SPECIFICATION
                 </h4>
-                <p className="font-sans text-xs sm:text-sm md:text-base text-neutral-800 leading-relaxed break-words">
+                <p className="font-sans text-xs sm:text-sm md:text-base text-neutral-800 leading-relaxed wrap-break-word">
                   {selectedServiceModal.fullDesc}
                 </p>
 
@@ -198,7 +198,7 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
                       key={idx}
                       className="flex items-start gap-2.5 p-3 bg-neutral-50 border border-neutral-200"
                     >
-                      <CheckCircle className="w-4 h-4 text-black mt-0.5 flex-shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-black mt-0.5 shrink-0" />
                       <span className="font-sans text-xs sm:text-sm text-neutral-800 font-medium">
                         {item}
                       </span>

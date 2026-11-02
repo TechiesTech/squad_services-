@@ -65,7 +65,7 @@ export default function IntroductionSection({ onLearnMoreClick }: IntroductionSe
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="text-sm sm:text-base md:text-lg text-neutral-800 font-normal leading-relaxed max-w-xl break-words"
+              className="text-sm sm:text-base md:text-lg text-neutral-800 font-normal leading-relaxed max-w-xl wrap-break-word"
             >
               <strong className="font-semibold text-black">
                 2. Squad Services Private Limited
@@ -86,13 +86,13 @@ export default function IntroductionSection({ onLearnMoreClick }: IntroductionSe
                 className="group inline-flex items-center gap-2.5 sm:gap-3 font-tech text-xs sm:text-sm font-bold tracking-[0.14em] sm:tracking-[0.18em] uppercase text-black hover:text-[#C68A00] transition-colors"
               >
                 <span>EXPLORE ALL 16 CAPABILITIES</span>
-                <span className="w-8 h-8 rounded-full border border-black group-hover:border-[#C68A00] group-hover:text-[#C68A00] flex items-center justify-center transition-all duration-300 group-hover:translate-x-1 flex-shrink-0">
+                <span className="w-8 h-8 rounded-full border border-black group-hover:border-[#C68A00] group-hover:text-[#C68A00] flex items-center justify-center transition-all duration-300 group-hover:translate-x-1 shrink-0">
                   <ArrowRight className="w-4 h-4" />
                 </span>
               </button>
 
               <div className="flex items-center gap-2 pl-3 sm:pl-4 border-l border-neutral-300">
-                <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-700 flex-shrink-0" />
+                <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-700 shrink-0" />
                 <span className="font-tech text-[10px] sm:text-xs text-neutral-600 tracking-wider">
                   ISO 9001 &bull; PSARA COMPLIANT
                 </span>
@@ -106,7 +106,7 @@ export default function IntroductionSection({ onLearnMoreClick }: IntroductionSe
               initial={{ clipPath: 'inset(100% 0% 0% 0%)', opacity: 0 }}
               animate={isInView ? { clipPath: 'inset(0% 0% 0% 0%)', opacity: 1 } : {}}
               transition={{ duration: 1.0, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative overflow-hidden aspect-[4/5] bg-neutral-900 group shadow-2xl"
+              className="relative overflow-hidden aspect-4/5 bg-neutral-900 group shadow-2xl"
               data-cursor="image"
             >
               <img
@@ -116,7 +116,7 @@ export default function IntroductionSection({ onLearnMoreClick }: IntroductionSe
                 loading="lazy"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
               <div className="absolute bottom-5 left-5 right-5 text-white">
                 <span className="font-tech text-[10px] tracking-[0.25em] uppercase text-neutral-300 block mb-1">
@@ -129,7 +129,7 @@ export default function IntroductionSection({ onLearnMoreClick }: IntroductionSe
             </motion.div>
 
             {/* Architectural accent border card */}
-            <div className="mt-4 sm:mt-0 sm:absolute sm:-bottom-6 sm:-left-6 bg-neutral-950 text-white p-4 sm:p-5 border border-neutral-800 shadow-xl w-full sm:max-w-[220px]">
+            <div className="mt-4 sm:mt-0 sm:absolute sm:-bottom-6 sm:-left-6 bg-neutral-950 text-white p-4 sm:p-5 border border-neutral-800 shadow-xl w-full sm:max-w-55">
               <div className="font-tech text-[10px] text-neutral-400 tracking-[0.2em] uppercase mb-1">
                 DISPATCH TIME
               </div>

@@ -1,5 +1,5 @@
 import { ArrowUp, ShieldCheck, Linkedin, Twitter, Instagram, Globe } from 'lucide-react';
-import { SERVICES_DATA } from '../data/servicesData';
+import { SERVICES_DATA } from '../../data/servicesData';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -27,14 +27,14 @@ export default function Footer() {
                 </div>
               </div>
 
-              <p className="mt-4 sm:mt-6 font-sans text-xs sm:text-sm text-neutral-400 max-w-sm leading-relaxed font-light break-words">
+              <p className="mt-4 sm:mt-6 font-sans text-xs sm:text-sm text-neutral-400 max-w-sm leading-relaxed font-light wrap-break-word">
                 Enterprise security, mechanized facility management, certified ground forces, and integrated workplace solutions engineered for world-class corporate organizations.
               </p>
             </div>
 
             <div className="mt-6 sm:mt-8 flex items-center gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-tech text-neutral-400">
-              <ShieldCheck className="w-4 h-4 text-neutral-300 flex-shrink-0" />
-              <span className="break-words">PSARA &bull; ISO 9001:2015 &bull; STATUTORY 100% COMPLIANT</span>
+              <ShieldCheck className="w-4 h-4 text-neutral-300 shrink-0" />
+              <span className="wrap-break-word">PSARA &bull; ISO 9001:2015 &bull; STATUTORY 100% COMPLIANT</span>
             </div>
           </div>
 
