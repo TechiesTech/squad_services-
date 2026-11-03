@@ -1,6 +1,6 @@
 import { useState, MouseEvent } from 'react';
 import { motion } from 'motion/react';
-import { INTEGRATED_NODES } from '../data/siteData';
+import { INTEGRATED_NODES } from '@/data/siteData';
 import { Shield, Sparkles, Users, Coffee, Wrench, Briefcase, Car, Bug, CheckCircle2 } from 'lucide-react';
 
 export default function IntegratedWorkplaceSection() {
@@ -35,25 +35,25 @@ export default function IntegratedWorkplaceSection() {
       className="relative w-full bg-black text-white py-16 sm:py-24 lg:py-32 overflow-hidden border-t border-neutral-900 select-none"
     >
       {/* Background Ambience */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.06)_0,_transparent_70%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06)_0,transparent_70%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Section Label */}
         <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-          <div className="w-6 sm:w-8 h-[1px] bg-neutral-600" />
+          <div className="w-6 sm:w-8 h-px bg-neutral-600" />
           <span className="font-tech text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.3em] text-neutral-400 uppercase font-semibold">
             05 / INTEGRATED WORKPLACE ECOSYSTEM
           </span>
-          <div className="w-6 sm:w-8 h-[1px] bg-neutral-600" />
+          <div className="w-6 sm:w-8 h-px bg-neutral-600" />
         </div>
 
         {/* Big Heading */}
-        <h2 className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[-0.03em] uppercase leading-tight text-white max-w-4xl mx-auto break-words">
+        <h2 className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[-0.03em] uppercase leading-tight text-white max-w-4xl mx-auto wrap-break-word">
           ONE WORKPLACE. <br />
           <span className="text-neutral-500">EVERY SOLUTION.</span>
         </h2>
 
-        <p className="mt-4 sm:mt-6 font-sans text-sm sm:text-base md:text-lg text-neutral-400 font-light max-w-2xl mx-auto leading-relaxed break-words px-2">
+        <p className="mt-4 sm:mt-6 font-sans text-sm sm:text-base md:text-lg text-neutral-400 font-light max-w-2xl mx-auto leading-relaxed wrap-break-word px-2">
           Eliminate siloed vendors. A single synchronized command infrastructure coordinating all perimeter, interior, engineering, and workforce activities.
         </p>
 
@@ -86,7 +86,7 @@ export default function IntegratedWorkplaceSection() {
                 key={`mobile-${node.id}`}
                 className="flex items-center gap-3 p-3.5 rounded-lg bg-neutral-900/80 border border-neutral-800 backdrop-blur-md"
               >
-                <div className="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-neutral-800 flex items-center justify-center shrink-0">
                   {getIcon(node.icon)}
                 </div>
                 <div className="min-w-0 flex-1">
@@ -103,10 +103,10 @@ export default function IntegratedWorkplaceSection() {
         </div>
 
         {/* DESKTOP/TABLET VIEW (>= md): Floating Orbital Stage with Parallax */}
-        <div className="hidden md:flex relative mt-16 sm:mt-20 h-[520px] lg:h-[600px] max-w-5xl mx-auto items-center justify-center">
+        <div className="hidden md:flex relative mt-16 sm:mt-20 h-130 lg:h-150 max-w-5xl mx-auto items-center justify-center">
           {/* Orbital Radar Rings */}
-          <div className="absolute w-[360px] h-[360px] lg:w-[480px] lg:h-[480px] rounded-full border border-neutral-800/60 pointer-events-none" />
-          <div className="absolute w-[240px] h-[240px] lg:w-[320px] lg:h-[320px] rounded-full border border-neutral-800/40 border-dashed pointer-events-none animate-[spin_120s_linear_infinite]" />
+          <div className="absolute w-90 h-90 lg:w-120 lg:h-120 rounded-full border border-neutral-800/60 pointer-events-none" />
+          <div className="absolute w-60 h-60 lg:w-[320px] lg:h-80 rounded-full border border-neutral-800/40 border-dashed pointer-events-none animate-[spin_120s_linear_infinite]" />
 
           {/* Center Office Visual */}
           <motion.div
@@ -166,7 +166,7 @@ export default function IntegratedWorkplaceSection() {
                   >
                     {getIcon(node.icon)}
                   </div>
-                  <div className="text-left pr-1 max-w-[150px]">
+                  <div className="text-left pr-1 max-w-37.5">
                     <span
                       className={`font-display font-bold text-xs tracking-wider uppercase block leading-none truncate ${
                         activeNode === node.id ? 'text-black' : 'text-white'
@@ -191,16 +191,16 @@ export default function IntegratedWorkplaceSection() {
         {/* Bottom Metrics Bar */}
         <div className="mt-10 sm:mt-14 flex flex-wrap items-center justify-center gap-4 sm:gap-8 lg:gap-16 pt-8 sm:pt-10 border-t border-neutral-900 text-neutral-400 font-tech text-xs tracking-wider sm:tracking-widest uppercase">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-white flex-shrink-0" />
-            <span className="break-words">Single Consolidated Monthly Invoice</span>
+            <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
+            <span className="wrap-break-word">Single Consolidated Monthly Invoice</span>
           </div>
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-white flex-shrink-0" />
-            <span className="break-words">Integrated Cross-Functional Rostering</span>
+            <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
+            <span className="wrap-break-word">Integrated Cross-Functional Rostering</span>
           </div>
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-white flex-shrink-0" />
-            <span className="break-words">Automated SLA Escalation Matrix</span>
+            <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
+            <span className="wrap-break-word">Automated SLA Escalation Matrix</span>
           </div>
         </div>
       </div>

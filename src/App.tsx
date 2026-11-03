@@ -4,47 +4,45 @@
  */
 
 import { useState, useRef } from 'react';
-import CustomCursor from './components/CustomCursor';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import IntroductionSection from './components/IntroductionSection';
-import AboutSection from './components/AboutSection';
-import ServicesSection from './components/ServicesSection';
-import ServiceExplanationSection from './components/ServiceExplanationSection';
-import IntegratedWorkplaceSection from './components/IntegratedWorkplaceSection';
-import WhyUsSection from './components/WhyUsSection';
-import ClientsSection from './components/ClientsSection';
-import CardStackingSection from './components/CardStackingSection';
-import CareersSection from './components/CareersSection';
-import ContactSection from './components/ContactSection';
-import Footer from './components/Footer';
-import { ServiceItem } from './types';
+import CustomCursor from '@/components/layout/CustomCursor';
+import Footer from '@/components/layout/Footer';
+import Navbar from '@/components/layout/Navbar';
+import AboutSection from '@/features/about/AboutSection';
+import CareersSection from '@/features/careers/CareersSection';
+import ClientsSection from '@/features/clients/ClientsSection';
+import ContactSection from '@/features/contact/ContactSection';
+import Hero from '@/features/hero/Hero';
+import IntroductionSection from '@/features/hero/IntroductionSection';
+import ServiceExplanationSection from '@/features/services/ServiceExplanationSection';
+import ServicesSection from '@/features/services/ServicesSection';
+import CardStackingSection from '@/features/solutions/CardStackingSection';
+import IntegratedWorkplaceSection from '@/features/solutions/IntegratedWorkplaceSection';
+import WhyUsSection from '@/features/solutions/WhyUsSection';
+import { ServiceItem } from '@/types';
 
 export default function App() {
   const [preselectedService, setPreselectedService] = useState<string>('01 SECURITY SERVICES');
   const contactRef = useRef<HTMLElement>(null);
 
-  const handleContactClick = () => {
-    const el = document.getElementById('contact');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+  const navigateToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    const hash = `#${sectionId}`;
+    if (window.location.hash !== hash) {
+      window.location.hash = hash;
     }
+    section.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const handleContactClick = () => navigateToSection('contact');
 
   const handleSelectService = (service: ServiceItem) => {
     setPreselectedService(`${service.number} ${service.title}`);
-    const el = document.getElementById('contact');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    navigateToSection('contact');
   };
 
-  const handleLearnMore = () => {
-    const el = document.getElementById('services');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const handleLearnMore = () => navigateToSection('services');
 
   return (
     <div className="relative min-h-screen bg-black text-white selection:bg-neutral-200 selection:text-black">

@@ -1,18 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { HERO_SLIDES } from '../data/siteData';
-import { ChevronRight, ChevronLeft, ArrowDown, Shield, Sparkles } from 'lucide-react';
+import { HERO_SLIDES } from '@/data/siteData';
+import { ChevronRight, ChevronLeft, Shield, Sparkles } from 'lucide-react';
 
 interface HeroProps {
   onContactClick: () => void;
 }
 
 export default function Hero({ onContactClick }: HeroProps) {
-  // Sequence phase:
-  // 0 = Initial company name reveal ("2. SQUAD SERVICES")
-  // 1 = Private limited badge reveal
-  // 2 = Rotating flip phrases ("SECURITY", "FACILITY MANAGEMENT", "WORKPLACE SERVICES", "PEOPLE. SECURITY. EXCELLENCE.")
-  // 3 = Full interactive hero slides view
   const [sequencePhase, setSequencePhase] = useState<number>(0);
   const [rotatingIndex, setRotatingIndex] = useState<number>(0);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -25,43 +20,33 @@ export default function Hero({ onContactClick }: HeroProps) {
     'PEOPLE. SECURITY. EXCELLENCE.',
   ];
 
-  // Run sequence timing
+  // Advance one phase at a time so skipping the intro cancels pending transitions.
   useEffect(() => {
-    // Step 0 -> Step 1 after 1.8s
-    const timer1 = setTimeout(() => {
-      setSequencePhase(1);
-    }, 1800);
-
-    // Step 1 -> Step 2 after 3.2s
-    const timer2 = setTimeout(() => {
-      setSequencePhase(2);
-    }, 3200);
-
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
-  }, []);
-
-  // Cycle through rotating phrases in phase 2, then unlock phase 3 (slide view)
-  useEffect(() => {
-    if (sequencePhase === 2) {
-      const interval = setInterval(() => {
-        setRotatingIndex((prev) => {
-          if (prev >= rotatingPhrases.length - 1) {
-            clearInterval(interval);
-            setTimeout(() => {
-              setSequencePhase(3);
-            }, 1200);
-            return prev;
-          }
-          return prev + 1;
-        });
-      }, 1000);
-
-      return () => clearInterval(interval);
+    if (sequencePhase === 0) {
+      const timer = setTimeout(() => setSequencePhase(1), 1800);
+      return () => clearTimeout(timer);
     }
-  }, [sequencePhase, rotatingPhrases.length]);
+
+    if (sequencePhase === 1) {
+      const timer = setTimeout(() => setSequencePhase(2), 1400);
+      return () => clearTimeout(timer);
+    }
+  }, [sequencePhase]);
+
+  // Cycle through rotating phrases in phase 2, then unlock phase 3 (slide view).
+  useEffect(() => {
+    if (sequencePhase !== 2) return;
+
+    if (rotatingIndex >= rotatingPhrases.length - 1) {
+      const timer = setTimeout(() => setSequencePhase(3), 1200);
+      return () => clearTimeout(timer);
+    }
+
+    const timer = setTimeout(() => {
+      setRotatingIndex((index) => index + 1);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [sequencePhase, rotatingIndex, rotatingPhrases.length]);
 
   // Slide autoplay when in phase 3
   useEffect(() => {
@@ -75,6 +60,12 @@ export default function Hero({ onContactClick }: HeroProps) {
   }, [sequencePhase, isPaused]);
 
   const activeSlideData = HERO_SLIDES[currentSlide];
+
+  useEffect(() => {
+    const nextSlide = HERO_SLIDES[(currentSlide + 1) % HERO_SLIDES.length];
+    const image = new Image();
+    image.src = nextSlide.image;
+  }, [currentSlide]);
 
   const handleNextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
@@ -94,7 +85,7 @@ export default function Hero({ onContactClick }: HeroProps) {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-[100dvh] sm:min-h-[640px] lg:min-h-[720px] bg-black text-white overflow-hidden flex flex-col justify-between select-none"
+      className="relative w-full min-h-dvh sm:min-h-160 lg:min-h-180 bg-black text-white overflow-hidden flex flex-col justify-between select-none"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -115,13 +106,15 @@ export default function Hero({ onContactClick }: HeroProps) {
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover object-center"
               loading="eager"
+              decoding="async"
+              fetchPriority={currentSlide === 0 ? 'high' : 'auto'}
             />
           </motion.div>
         </AnimatePresence>
 
         {/* Cinematic Vignette & Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/80" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/40 to-black" />
+        <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-black/80" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-transparent via-black/40 to-black" />
 
         {/* Subtle Corporate Grid Line Matrix */}
         <div
@@ -138,7 +131,7 @@ export default function Hero({ onContactClick }: HeroProps) {
         {/* Top Status Indicator */}
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2 sm:gap-3 overflow-hidden">
-            <span className="inline-block w-2 h-2 rounded-full bg-neutral-400 animate-pulse flex-shrink-0" />
+            <span className="inline-block w-2 h-2 rounded-full bg-neutral-400 animate-pulse shrink-0" />
             <span className="font-tech text-[9px] sm:text-xs text-neutral-400 tracking-[0.18em] sm:tracking-[0.25em] uppercase font-semibold truncate">
               ENTERPRISE INTEGRATED OPERATIONS &bull; 24/7 SOC ACTIVE
             </span>
@@ -147,7 +140,7 @@ export default function Hero({ onContactClick }: HeroProps) {
           {sequencePhase < 3 && (
             <button
               onClick={() => setSequencePhase(3)}
-              className="font-tech text-[10px] tracking-widest text-neutral-400 hover:text-white transition-colors underline decoration-neutral-600 underline-offset-4 flex-shrink-0"
+              className="font-tech text-[10px] tracking-widest text-neutral-400 hover:text-white transition-colors underline decoration-neutral-600 underline-offset-4 shrink-0"
             >
               SKIP INTRO
             </button>
@@ -158,9 +151,7 @@ export default function Hero({ onContactClick }: HeroProps) {
         <div className="my-auto flex flex-col items-center text-center justify-center py-6 sm:py-10">
           <AnimatePresence mode="wait">
             {sequencePhase < 3 ? (
-              /* ============================================================ */
               /* INITIAL SEQUENCE: 2. SQUAD SERVICES -> PVT LTD -> FLIP PHRASES */
-              /* ============================================================ */
               <motion.div
                 key="intro-sequence"
                 initial={{ opacity: 0 }}
@@ -176,7 +167,7 @@ export default function Hero({ onContactClick }: HeroProps) {
                   transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
                   className="relative"
                 >
-                  <h1 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight text-white leading-tight break-words text-center">
+                  <h1 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight text-white leading-tight wrap-break-word text-center">
                     2. SQUAD SERVICES
                   </h1>
                 </motion.div>
@@ -192,7 +183,7 @@ export default function Hero({ onContactClick }: HeroProps) {
                         transition={{ duration: 0.7 }}
                         className="flex items-center gap-2 sm:gap-3 px-3.5 py-1 sm:px-4 sm:py-1.5 border border-neutral-700/60 bg-neutral-900/60 backdrop-blur-md rounded-full"
                       >
-                        <Shield className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-neutral-300 flex-shrink-0" />
+                        <Shield className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-neutral-300 shrink-0" />
                         <span className="font-tech text-[10px] sm:text-xs font-semibold tracking-[0.25em] text-neutral-300 uppercase truncate">
                           PRIVATE LIMITED
                         </span>
@@ -213,7 +204,7 @@ export default function Hero({ onContactClick }: HeroProps) {
                         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                         className="perspective-1000"
                       >
-                        <span className="font-tech text-[11px] sm:text-base md:text-lg font-bold tracking-[0.16em] sm:tracking-[0.2em] text-neutral-300 uppercase border-b border-white/20 pb-1 text-center block max-w-[280px] sm:max-w-md mx-auto break-words">
+                        <span className="font-tech text-[11px] sm:text-base md:text-lg font-bold tracking-[0.16em] sm:tracking-[0.2em] text-neutral-300 uppercase border-b border-white/20 pb-1 text-center block max-w-70 sm:max-w-md mx-auto wrap-break-word">
                           {rotatingPhrases[rotatingIndex]}
                         </span>
                       </motion.div>
@@ -222,9 +213,7 @@ export default function Hero({ onContactClick }: HeroProps) {
                 </div>
               </motion.div>
             ) : (
-              /* ============================================================ */
               /* 4 CINEMATIC SLIDES VIEW: MEDIUM BALANCED TITLES             */
-              /* ============================================================ */
               <motion.div
                 key={`slide-${activeSlideData.id}`}
                 initial={{ opacity: 0, y: 30, filter: 'blur(12px)' }}
@@ -251,7 +240,7 @@ export default function Hero({ onContactClick }: HeroProps) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.7 }}
-                  className="font-display font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight leading-snug sm:leading-tight text-white uppercase max-w-3xl break-words"
+                  className="font-display font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight leading-snug sm:leading-tight text-white uppercase max-w-3xl wrap-break-word"
                 >
                   {activeSlideData.heading}
                 </motion.h1>
@@ -261,7 +250,7 @@ export default function Hero({ onContactClick }: HeroProps) {
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.6 }}
-                  className="mt-3 sm:mt-5 font-sans text-xs sm:text-base md:text-lg text-neutral-300 max-w-2xl font-normal leading-relaxed break-words px-1"
+                  className="mt-3 sm:mt-5 font-sans text-xs sm:text-base md:text-lg text-neutral-300 max-w-2xl font-normal leading-relaxed wrap-break-word px-1"
                 >
                   {activeSlideData.subheading}
                 </motion.p>
@@ -309,7 +298,7 @@ export default function Hero({ onContactClick }: HeroProps) {
                     setSequencePhase(3);
                     setCurrentSlide(idx);
                   }}
-                  className="h-1 transition-all duration-500 rounded-full cursor-pointer relative overflow-hidden flex-shrink-0"
+                  className="h-1 transition-all duration-500 rounded-full cursor-pointer relative overflow-hidden shrink-0"
                   style={{
                     width: currentSlide === idx ? '24px' : '8px',
                     backgroundColor: currentSlide === idx ? '#ffffff' : 'rgba(255,255,255,0.3)',
@@ -363,18 +352,6 @@ export default function Hero({ onContactClick }: HeroProps) {
         </div>
       </div>
 
-      {/* Hidden Preloader for all 5 Hero Background Images with no-referrer */}
-      <div className="hidden" aria-hidden="true">
-        {HERO_SLIDES.map((slide) => (
-          <img
-            key={`preload-${slide.id}`}
-            src={slide.image}
-            alt=""
-            referrerPolicy="no-referrer"
-            loading="eager"
-          />
-        ))}
-      </div>
     </section>
   );
 }

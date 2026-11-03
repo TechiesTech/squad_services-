@@ -1,13 +1,14 @@
-import { useState, forwardRef, FormEvent } from 'react';
+import { useState, useEffect, useRef, forwardRef, FormEvent } from 'react';
 import { motion } from 'motion/react';
-import { Mail, Phone, MapPin, Send, CheckCircle2, Clock, ShieldAlert } from 'lucide-react';
-import { SERVICES_DATA } from '../data/servicesData';
+import { Mail, Phone, MapPin, Send, CheckCircle2, Clock } from 'lucide-react';
+import { SERVICES_DATA } from '@/data/servicesData';
 
 interface ContactSectionProps {
   preselectedService?: string;
 }
 
 const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ preselectedService }, ref) => {
+  const submitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -19,13 +20,25 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ preselect
 
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [referenceId, setReferenceId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (preselectedService) {
+      setFormData((current) => ({ ...current, serviceRequired: preselectedService }));
+    }
+  }, [preselectedService]);
+
+  useEffect(() => () => {
+    if (submitTimerRef.current) {
+      clearTimeout(submitTimerRef.current);
+    }
+  }, []);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Simulate enterprise inquiry submission
-    setTimeout(() => {
+    setReferenceId(`2SQ-${Math.floor(1000 + Math.random() * 9000)}`);
+    submitTimerRef.current = setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
     }, 1000);
@@ -40,7 +53,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ preselect
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Label */}
         <div className="flex items-center gap-3 mb-4 sm:mb-6">
-          <div className="w-8 h-[1px] bg-neutral-600" />
+          <div className="w-8 h-px bg-neutral-600" />
           <span className="font-tech text-xs tracking-[0.25em] text-neutral-400 uppercase font-semibold">
             10 / GET IN TOUCH
           </span>
@@ -62,7 +75,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ preselect
             {/* Direct Contact Channels */}
             <div className="mt-8 sm:mt-12 flex flex-col gap-5 sm:gap-6 pt-6 sm:pt-8 border-t border-neutral-800">
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 border border-neutral-800 bg-neutral-900 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 border border-neutral-800 bg-neutral-900 flex items-center justify-center shrink-0">
                   <Mail className="w-4 h-4 text-neutral-300" />
                 </div>
                 <div>
@@ -79,7 +92,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ preselect
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 border border-neutral-800 bg-neutral-900 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 border border-neutral-800 bg-neutral-900 flex items-center justify-center shrink-0">
                   <Phone className="w-4 h-4 text-neutral-300" />
                 </div>
                 <div>
@@ -96,7 +109,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ preselect
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 border border-neutral-800 bg-neutral-900 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 border border-neutral-800 bg-neutral-900 flex items-center justify-center shrink-0">
                   <MapPin className="w-4 h-4 text-neutral-300" />
                 </div>
                 <div>
@@ -112,7 +125,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ preselect
 
             {/* 24/7 Operations Badge */}
             <div className="mt-6 sm:mt-8 p-4 bg-neutral-900/60 border border-neutral-800 rounded flex items-center gap-3">
-              <Clock className="w-5 h-5 text-neutral-300 flex-shrink-0" />
+              <Clock className="w-5 h-5 text-neutral-300 shrink-0" />
               <div className="font-tech text-xs text-neutral-300 tracking-wider">
                 <span className="text-white font-semibold">24/7 SOC COMMAND: </span>
                 Continuous round-the-clock supervisor dispatch and emergency response desk.
@@ -143,7 +156,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ preselect
                 <h4 className="font-display font-bold text-2xl uppercase">INQUIRY RECEIVED</h4>
                 <p className="font-sans text-neutral-400 max-w-md mt-2 text-sm sm:text-base">
                   Thank you, <strong className="text-white">{formData.name}</strong>. Your requirement for{' '}
-                  <span className="text-white font-medium">{formData.serviceRequired}</span> has been logged with reference ID <span className="font-tech text-neutral-300">#2SQ-{Math.floor(1000 + Math.random() * 9000)}</span>. Our regional operations director will reach out shortly.
+                  <span className="text-white font-medium">{formData.serviceRequired}</span> has been logged with reference ID <span className="font-tech text-neutral-300">#{referenceId}</span>. Our regional operations director will reach out shortly.
                 </p>
                 <button
                   onClick={() => {
@@ -156,6 +169,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ preselect
                       serviceRequired: '01 SECURITY SERVICES',
                       message: '',
                     });
+                    setReferenceId(null);
                   }}
                   className="mt-8 px-6 py-2.5 bg-white text-black font-tech text-xs font-bold tracking-widest uppercase hover:bg-neutral-200 transition-colors"
                 >
@@ -234,6 +248,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ preselect
                     Primary Service Required *
                   </label>
                   <select
+                    aria-label="Primary Service Required"
                     value={formData.serviceRequired}
                     onChange={(e) => setFormData({ ...formData, serviceRequired: e.target.value })}
                     className="w-full max-w-full px-4 py-3 bg-neutral-900 border border-neutral-800 text-white focus:outline-none focus:border-white transition-colors text-sm truncate"

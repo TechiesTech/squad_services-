@@ -34,8 +34,11 @@ export default function Navbar({ onContactClick }: NavbarProps) {
       onContactClick();
       return;
     }
-    const target = document.querySelector(href);
+    const target = document.getElementById(href.slice(1));
     if (target) {
+      if (window.location.hash !== href) {
+        window.location.hash = href;
+      }
       target.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -60,7 +63,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
             className="group flex items-center gap-2.5 sm:gap-3"
             data-cursor-text="HOME"
           >
-            <div className="w-8 h-8 sm:w-9 sm:h-9 border border-neutral-400/40 bg-neutral-950 flex items-center justify-center transition-all duration-300 group-hover:border-white group-hover:bg-neutral-900 flex-shrink-0">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 border border-neutral-400/40 bg-neutral-950 flex items-center justify-center transition-all duration-300 group-hover:border-white group-hover:bg-neutral-900 shrink-0">
               <span className="font-display font-black text-xs sm:text-sm text-neutral-100 tracking-tighter">
                 2.S
               </span>
@@ -88,7 +91,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
                 className="font-tech text-[11px] font-medium tracking-[0.18em] text-neutral-300 hover:text-white transition-colors relative group py-1"
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full" />
+                <span className="absolute bottom-0 left-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </nav>
@@ -124,7 +127,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-30 bg-neutral-950/98 backdrop-blur-2xl flex flex-col justify-between p-6 sm:p-8 pt-24 sm:pt-28 pb-8 overflow-y-auto max-h-[100dvh] lg:hidden"
+            className="fixed inset-0 z-30 bg-neutral-950/98 backdrop-blur-2xl flex flex-col justify-between p-6 sm:p-8 pt-24 sm:pt-28 pb-8 overflow-y-auto max-h-dvh lg:hidden"
           >
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-2 pb-4 border-b border-neutral-800 text-neutral-400 font-tech text-xs tracking-widest">

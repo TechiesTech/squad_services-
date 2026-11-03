@@ -78,7 +78,7 @@ export default function ServiceExplanationSection({ onLearnMore }: ServiceExplan
         {/* Section Label */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 sm:mb-12">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-[1px] bg-neutral-500" />
+            <div className="w-8 h-px bg-neutral-500" />
             <span className="font-tech text-xs tracking-[0.25em] text-neutral-400 uppercase font-semibold">
               DYNAMIC PILLAR DEEP DIVE
             </span>
@@ -110,7 +110,7 @@ export default function ServiceExplanationSection({ onLearnMore }: ServiceExplan
           {/* LEFT: Large Service Image */}
           <div className="lg:col-span-6 relative">
             <div
-              className="relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden bg-neutral-900 border border-neutral-800 shadow-2xl"
+              className="relative aspect-4/3 sm:aspect-16/10 overflow-hidden bg-neutral-900 border border-neutral-800 shadow-2xl"
               data-cursor="image"
             >
               <AnimatePresence mode="wait">
@@ -127,14 +127,14 @@ export default function ServiceExplanationSection({ onLearnMore }: ServiceExplan
                 />
               </AnimatePresence>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
 
               <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between text-white">
                 <div className="flex items-center gap-2 font-tech text-xs tracking-widest uppercase">
-                  <ShieldCheck className="w-4 h-4 text-neutral-300 flex-shrink-0" />
+                  <ShieldCheck className="w-4 h-4 text-neutral-300 shrink-0" />
                   <span className="truncate">2. SQUAD VERIFIED</span>
                 </div>
-                <span className="font-tech text-xs tracking-widest text-neutral-400 uppercase flex-shrink-0">
+                <span className="font-tech text-xs tracking-widest text-neutral-400 uppercase shrink-0">
                   ACTIVE DEPLOYMENT
                 </span>
               </div>
@@ -148,7 +148,7 @@ export default function ServiceExplanationSection({ onLearnMore }: ServiceExplan
             </span>
 
             {/* Static Pillar Title */}
-            <h3 className="font-display font-black text-2xl sm:text-4xl md:text-5xl tracking-[-0.03em] uppercase mt-2 mb-4 sm:mb-6 text-white leading-tight break-words">
+            <h3 className="font-display font-black text-2xl sm:text-4xl md:text-5xl tracking-[-0.03em] uppercase mt-2 mb-4 sm:mb-6 text-white leading-tight wrap-break-word">
               {activePillar.title}
             </h3>
 
@@ -177,7 +177,7 @@ export default function ServiceExplanationSection({ onLearnMore }: ServiceExplan
             </div>
 
             {/* Pillar Narrative */}
-            <p className="font-sans text-xs sm:text-sm md:text-base text-neutral-300 leading-relaxed font-light mb-5 sm:mb-6 break-words">
+            <p className="font-sans text-xs sm:text-sm md:text-base text-neutral-300 leading-relaxed font-light mb-5 sm:mb-6 wrap-break-word">
               {activePillar.description}
             </p>
 
@@ -185,7 +185,7 @@ export default function ServiceExplanationSection({ onLearnMore }: ServiceExplan
             <div className="flex flex-col gap-2.5 mb-6 sm:mb-8">
               {activePillar.standards.map((st, i) => (
                 <div key={i} className="flex items-center gap-2.5 font-sans text-xs sm:text-sm text-neutral-300">
-                  <CheckSquare className="w-4 h-4 text-neutral-400 flex-shrink-0" />
+                  <CheckSquare className="w-4 h-4 text-neutral-400 shrink-0" />
                   <span>{st}</span>
                 </div>
               ))}
