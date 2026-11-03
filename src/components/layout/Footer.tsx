@@ -1,5 +1,5 @@
 import { ArrowUp, ShieldCheck, Linkedin, Twitter, Instagram, Globe } from 'lucide-react';
-import { SERVICES_DATA } from '../../data/servicesData';
+import { SERVICES_DATA } from '@/data/servicesData';
 
 export default function Footer() {
   const scrollToTop = () => {

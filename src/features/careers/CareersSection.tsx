@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { JOB_OPENINGS } from '../../data/siteData';
-import { JobOpening } from '../../types';
+import { JOB_OPENINGS } from '@/data/siteData';
+import { JobOpening } from '@/types';
 import { ArrowRight, MapPin, X, CheckCircle2, UserCheck } from 'lucide-react';
 
 export default function CareersSection() {

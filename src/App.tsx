@@ -4,21 +4,21 @@
  */
 
 import { useState, useRef } from 'react';
-import CustomCursor from './components/shared/CustomCursor';
-import Navbar from './components/shared/Navbar';
-import Hero from './components/hero/Hero';
-import IntroductionSection from './components/hero/IntroductionSection';
-import AboutSection from './components/about/AboutSection';
-import ServicesSection from './components/services/ServicesSection';
-import ServiceExplanationSection from './components/services/ServiceExplanationSection';
-import IntegratedWorkplaceSection from './components/solutions/IntegratedWorkplaceSection';
-import WhyUsSection from './components/solutions/WhyUsSection';
-import ClientsSection from './components/clients/ClientsSection';
-import CardStackingSection from './components/solutions/CardStackingSection';
-import CareersSection from './components/careers/CareersSection';
-import ContactSection from './components/contact/ContactSection';
-import Footer from './components/shared/Footer';
-import { ServiceItem } from './types';
+import CustomCursor from '@/components/layout/CustomCursor';
+import Footer from '@/components/layout/Footer';
+import Navbar from '@/components/layout/Navbar';
+import AboutSection from '@/features/about/AboutSection';
+import CareersSection from '@/features/careers/CareersSection';
+import ClientsSection from '@/features/clients/ClientsSection';
+import ContactSection from '@/features/contact/ContactSection';
+import Hero from '@/features/hero/Hero';
+import IntroductionSection from '@/features/hero/IntroductionSection';
+import ServiceExplanationSection from '@/features/services/ServiceExplanationSection';
+import ServicesSection from '@/features/services/ServicesSection';
+import CardStackingSection from '@/features/solutions/CardStackingSection';
+import IntegratedWorkplaceSection from '@/features/solutions/IntegratedWorkplaceSection';
+import WhyUsSection from '@/features/solutions/WhyUsSection';
+import { ServiceItem } from '@/types';
 
 export default function App() {
   const [preselectedService, setPreselectedService] = useState<string>('01 SECURITY SERVICES');

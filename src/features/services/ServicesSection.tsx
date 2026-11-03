@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { SERVICES_DATA } from '../../data/servicesData';
-import { ServiceItem } from '../../types';
+import { SERVICES_DATA } from '@/data/servicesData';
+import { ServiceItem } from '@/types';
 import { ArrowUpRight, CheckCircle, X, Shield, Layers } from 'lucide-react';
 
 interface ServicesSectionProps {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { HERO_SLIDES } from '../../data/siteData';
+import { HERO_SLIDES } from '@/data/siteData';
 import { ChevronRight, ChevronLeft, Shield, Sparkles } from 'lucide-react';
 
 interface HeroProps {

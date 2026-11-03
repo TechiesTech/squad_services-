@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, forwardRef, FormEvent } from 'react';
 import { motion } from 'motion/react';
 import { Mail, Phone, MapPin, Send, CheckCircle2, Clock } from 'lucide-react';
-import { SERVICES_DATA } from '../../data/servicesData';
+import { SERVICES_DATA } from '@/data/servicesData';
 
 interface ContactSectionProps {
   preselectedService?: string;
@@ -248,6 +248,7 @@ const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(({ preselect
                     Primary Service Required *
                   </label>
                   <select
+                    aria-label="Primary Service Required"
                     value={formData.serviceRequired}
                     onChange={(e) => setFormData({ ...formData, serviceRequired: e.target.value })}
                     className="w-full max-w-full px-4 py-3 bg-neutral-900 border border-neutral-800 text-white focus:outline-none focus:border-white transition-colors text-sm truncate"

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'motion/react';
-import { STATS_DATA } from '../../data/siteData';
+import { STATS_DATA } from '@/data/siteData';
 import { ShieldCheck, Award, CheckCircle2 } from 'lucide-react';
 
 function CounterNumber({ value, suffix, isVisible }: { value: number; suffix: string; isVisible: boolean }) {

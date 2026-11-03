@@ -1,4 +1,4 @@
-import { HeroSlide, StatItem, WhyUsItem, StackedCardItem, JobOpening } from '../types';
+import { HeroSlide, StatItem, WhyUsItem, StackedCardItem, JobOpening } from '@/types';
 
 export const HERO_SLIDES: HeroSlide[] = [
   {

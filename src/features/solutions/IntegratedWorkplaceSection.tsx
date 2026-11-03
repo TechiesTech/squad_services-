@@ -1,6 +1,6 @@
 import { useState, MouseEvent } from 'react';
 import { motion } from 'motion/react';
-import { INTEGRATED_NODES } from '../../data/siteData';
+import { INTEGRATED_NODES } from '@/data/siteData';
 import { Shield, Sparkles, Users, Coffee, Wrench, Briefcase, Car, Bug, CheckCircle2 } from 'lucide-react';
 
 export default function IntegratedWorkplaceSection() {

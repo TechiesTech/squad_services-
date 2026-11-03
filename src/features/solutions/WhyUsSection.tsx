@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { WHY_US_DATA } from '../../data/siteData';
+import { WHY_US_DATA } from '@/data/siteData';
 import { Check, ShieldCheck, Users, Cpu, Clock, HeartHandshake } from 'lucide-react';
 
 export default function WhyUsSection() {

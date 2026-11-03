@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, MotionValue } from 'motion/react';
-import { STACKED_CARDS } from '../../data/siteData';
-import { StackedCardItem } from '../../types';
+import { STACKED_CARDS } from '@/data/siteData';
+import { StackedCardItem } from '@/types';
 import { ShieldCheck, ArrowUpRight } from 'lucide-react';
 
 interface CardItemProps {

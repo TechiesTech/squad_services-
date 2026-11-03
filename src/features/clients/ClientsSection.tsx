@@ -1,4 +1,4 @@
-import { CLIENT_LOGOS } from '../../data/siteData';
+import { CLIENT_LOGOS } from '@/data/siteData';
 import { Building2 } from 'lucide-react';
 
 export default function ClientsSection() {
